@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using ContosoPizza.Models;
 using ContosoPizza.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -10,10 +11,23 @@ public class PizzaController : ControllerBase
 {
     public PizzaController()
     {
-        //Get all action
-        //Get by Id action
-        //POST action
-        //PUT action
-        //DELETE action
     }
+
+    //Get all action
+    [HttpGet]
+    public ActionResult<List<Pizza>> GetAll() => PizzaService.GetAll();
+
+    //Get by Id action
+    [HttpGet("{id}")]
+    public ActionResult<Pizza> Get(int id)
+    {
+        var pizza = PizzaService.Get(id);
+        if (pizza == null) return NotFound();
+        return pizza;
+    }
+
+    //POST action
+    //PUT action
+    //DELETE action
+
 }
